@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  socket: any;
+
+  constructor() {
+    this.socket = io.connect('https://test.peekabid.com/socket.io/');
+
+    this.socket.on('bid', (data: any) => {
+      console.log(data);
+      console.log('bid');
+    });
+  }
 
 }
